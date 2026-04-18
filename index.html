@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الخطة الدراسية – علوم الحاسب | جامعة الملك خالد</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:       #0d1f35;
+    --navy-mid:   #132d4a;
+    --navy-light: #1a3e63;
+    --gold:       #c8973a;
+    --gold-light: #e8b84b;
+    --gold-pale:  #fdf3dc;
+    --teal:       #1b6b6b;
+    --teal-light: #238f8f;
+    --slate:      #e8edf2;
+    --text-main:  #0d1f35;
+    --text-muted: #5a7080;
+    --white:      #ffffff;
+    --sem1:  #1a4971;
+    --sem2:  #1a5c5c;
+    --sem3:  #2a5e2a;
+    --sem4:  #5c3d1a;
+    --sem5:  #4a1a5c;
+    --sem6:  #6b1a1a;
+    --sem7:  #1a3d5c;
+    --sem8:  #3d1a4a;
+    --elec:  #4a3800;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'IBM Plex Sans Arabic', sans-serif;
+    background: #f0f4f8;
+    color: var(--text-main);
+    min-height: 100vh;
+  }
+
+  /* ─── HEADER ─── */
+  .page-header {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 60%, #1e4f7a 100%);
+    color: white;
+    padding: 2.5rem 2rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .page-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+  .header-inner {
+    max-width: 1300px;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+  .header-title {
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    line-height: 1.3;
+  }
+  .header-sub {
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.7);
+    margin-top: 0.4rem;
+    font-weight: 400;
+  }
+  .header-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    align-items: center;
+    margin-top: 1.2rem;
+  }
+  .hbadge {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 50px;
+    padding: 0.3rem 1rem;
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.9);
+    white-space: nowrap;
+  }
+  .hbadge.gold {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--navy);
+    font-weight: 600;
+  }
+
+  /* ─── MAIN WRAP ─── */
+  .main-wrap {
+    max-width: 1300px;
+    margin: 2rem auto;
+    padding: 0 1.2rem 3rem;
+  }
+
+  /* ─── STATS BAR ─── */
+  .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 0.8rem;
+    margin-bottom: 2rem;
+  }
+  .stat-card {
+    background: white;
+    border-radius: 14px;
+    padding: 1rem 1.2rem;
+    text-align: center;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    border-top: 3px solid var(--gold);
+  }
+  .stat-num { font-size: 1.8rem; font-weight: 700; color: var(--navy); line-height: 1; }
+  .stat-lbl { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.3rem; }
+
+  /* ─── SEMESTER CARD ─── */
+  .sem-wrap { margin-bottom: 1.2rem; }
+
+  .sem-card {
+    background: white;
+    border-radius: 18px;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.07);
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+
+  .sem-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.1rem 1.6rem;
+    cursor: pointer;
+    user-select: none;
+    transition: opacity 0.15s;
+    gap: 1rem;
+  }
+  .sem-header:hover { opacity: 0.92; }
+
+  .sem-title-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .sem-num {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.22);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem; font-weight: 700; color: white; flex-shrink: 0;
+  }
+  .sem-name { font-size: 1.1rem; font-weight: 700; color: white; }
+  .sem-sub  { font-size: 0.78rem; color: rgba(255,255,255,0.7); margin-top: 1px; }
+  .sem-credit-badge {
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white;
+    padding: 0.3rem 0.9rem;
+    border-radius: 40px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .sem-toggle {
+    color: rgba(255,255,255,0.7);
+    font-size: 1.1rem;
+    transition: transform 0.25s;
+    flex-shrink: 0;
+  }
+  .sem-card.collapsed .sem-toggle { transform: rotate(-90deg); }
+
+  /* ─── TABLE ─── */
+  .sem-body { overflow: hidden; transition: max-height 0.35s ease; }
+  .sem-card.collapsed .sem-body { display: none; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+  thead tr {
+    background: #f4f7fa;
+    border-bottom: 2px solid #e0e8f0;
+  }
+  thead th {
+    padding: 0.75rem 1rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    text-align: right;
+    white-space: nowrap;
+  }
+  tbody tr {
+    border-bottom: 1px solid #f0f4f7;
+    transition: background 0.12s;
+  }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: #f8fbff; }
+  td {
+    padding: 0.85rem 1rem;
+    vertical-align: middle;
+  }
+  .td-code {
+    font-family: 'Courier New', monospace;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--navy-light);
+    background: #eef3f8;
+    padding: 0.22rem 0.6rem;
+    border-radius: 6px;
+    white-space: nowrap;
+    display: inline-block;
+  }
+  .td-name { font-weight: 600; color: var(--text-main); }
+  .td-credit {
+    font-weight: 700;
+    color: var(--navy);
+    font-size: 1rem;
+    text-align: center;
+  }
+  .td-prereq {
+    font-size: 0.78rem;
+    color: #8b6b42;
+    background: #fdf3dc;
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    white-space: normal;
+    display: inline-block;
+    line-height: 1.4;
+  }
+  .td-prereq.none { background: #f0f0f0; color: #aaa; }
+
+  /* row number */
+  .row-n {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: #e8edf2;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 0.72rem; font-weight: 700; color: var(--text-muted);
+  }
+
+  .table-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0.7rem 1.6rem;
+    background: #f8fafb;
+    border-top: 1px solid #e8edf2;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    gap: 0.4rem;
+  }
+  .total-chip {
+    background: var(--navy);
+    color: white;
+    padding: 0.25rem 0.8rem;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.82rem;
+  }
+
+  /* ─── SECTION LABEL ─── */
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 2rem 0 0.8rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid #e0e8f0;
+  }
+
+  /* ─── ELECTIVE CARD ─── */
+  .elec-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0.7rem;
+    padding: 1.2rem 1.4rem;
+    background: #fdf8ee;
+  }
+  .elec-item {
+    background: white;
+    border: 1px solid #e8dfc8;
+    border-radius: 10px;
+    padding: 0.65rem 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    transition: box-shadow 0.15s;
+  }
+  .elec-item:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+  .elec-name { font-size: 0.88rem; font-weight: 600; color: var(--text-main); }
+  .elec-code { font-size: 0.7rem; color: var(--text-muted); font-family: monospace; }
+  .elec-hr {
+    background: var(--gold);
+    color: white;
+    border-radius: 20px;
+    padding: 0.15rem 0.5rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .elec-note {
+    padding: 0.8rem 1.4rem;
+    background: #fdf8ee;
+    border-top: 1px solid #e8dfc8;
+    font-size: 0.8rem;
+    color: #8b6b42;
+  }
+
+  /* ─── FREE HOURS ─── */
+  .free-card {
+    background: white;
+    border-radius: 14px;
+    border: 2px dashed #b8d4b8;
+    padding: 1.2rem 1.6rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  .free-icon { font-size: 2rem; }
+  .free-text { font-size: 0.9rem; font-weight: 600; color: var(--teal); }
+  .free-sub  { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; }
+
+  /* ─── FOOTER ─── */
+  .page-footer {
+    text-align: center;
+    padding: 1.5rem 1rem 2.5rem;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    border-top: 1px solid #dde4eb;
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 640px) {
+    .sem-header { padding: 0.9rem 1rem; }
+    td, thead th { padding: 0.65rem 0.6rem; }
+    .td-code { font-size: 0.7rem; }
+    .stats-bar { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════ HEADER ══════════════ -->
+<div class="page-header">
+  <div class="header-inner">
+    <div>
+      <div class="header-title">📘 الخطة الدراسية – علوم الحاسب</div>
+      <div class="header-sub">جامعة الملك خالد | كلية علوم الحاسب | قسم علوم الحاسب</div>
+      <div class="header-badges">
+        <span class="hbadge gold">درجة: بكالوريوس</span>
+        <span class="hbadge">الإصدار: 10</span>
+        <span class="hbadge">الفصل: 461</span>
+        <span class="hbadge">نوع الخطة: رئيسي</span>
+        <span class="hbadge">الجنس: كليهما</span>
+        <span class="hbadge">التخصص: 010201</span>
+      </div>
+    </div>
+    <div style="text-align:center; background:rgba(255,255,255,0.1); border-radius:16px; padding:1rem 1.5rem;">
+      <div style="font-size:2.5rem;font-weight:700;color:#e8b84b;line-height:1">140</div>
+      <div style="font-size:0.78rem;color:rgba(255,255,255,0.7);margin-top:4px">إجمالي الساعات المعتمدة</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ MAIN ══════════════ -->
+<div class="main-wrap">
+
+  <!-- Stats -->
+  <div class="stats-bar">
+    <div class="stat-card"><div class="stat-num">8</div><div class="stat-lbl">فصول دراسية</div></div>
+    <div class="stat-card"><div class="stat-num">39</div><div class="stat-lbl">مقرر إجباري</div></div>
+    <div class="stat-card"><div class="stat-num">120</div><div class="stat-lbl">ساعات إجبارية</div></div>
+    <div class="stat-card"><div class="stat-num">18</div><div class="stat-lbl">ساعات اختيارية وحرة</div></div>
+    <div class="stat-card"><div class="stat-num">10</div><div class="stat-lbl">مقررات اختيارية متاحة</div></div>
+  </div>
+
+  <div class="section-label">المقررات الإجبارية – المسار الرئيسي</div>
+
+  <!-- ══ SEMESTER 1 ══ -->
+  <div class="sem-wrap">
+    <div class="sem-card" id="sem1">
+      <div class="sem-header" style="background:var(--sem1);" onclick="toggle('sem1')">
+        <div class="sem-title-row">
+          <div class="sem-num">١</div>
+          <div>
+            <div class="sem-name">الفصل الدراسي الأول</div>
+            <div class="sem-sub">المستوى الأول</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:.8rem">
+          <span class="sem-credit-badge">15 ساعة</span>
+          <span class="sem-toggle">▼</span>
+        </div>
+      </div>
+      <div class="sem-body">
+        <table>
+          <thead><tr>
+            <th>#</th><th>رمز المقرر</th><th>اسم المقرر</th>
+            <th style="text-align:center">ساعات</th><th>المتطلب</th>
+          </tr></thead>
+          <tbody>
+            <tr><td><span class="row-n">1</span></td><td><span class="td-code">0212ثقف2</span></td><td class="td-name">الوسطية والاعتدال</td><td class="td-credit">2</td><td><span class="td-prereq none">–</span></td></tr>
+            <tr><td><span class="row-n">2</span></td><td><span class="td-code">0291تطوع2</span></td><td class="td-name">مهارات في التطوع</td><td class="td-credit">2</td><td><span class="td-prereq none">–</span></td></tr>
+            <tr><td><span class="row-n">3</span></td><td><span class="td-code">0383ريض3</span></td><td class="td-name">الجبر الخطي</td><td class="td-credit">3</td><td><span class="td-prereq none">–</span></td></tr>
+            <tr><td><span class="row-n">4</span></td><td><span class="td-code">0522نجل5</span></td><td class="td-name">اللغة الإنجليزية المكثفة</td><td class="td-credit">5</td><td><span class="td-prereq none">–</span></td></tr>
+            <tr><td><span class="row-n">5</span></td><td><span class="td-code">1311عال3</span></td><td class="td-name">حل المشاكل والبرمجة</td><td class="td-credit">3</td><td><span class="td-prereq none">–</span></td></tr>
+          </tbody>
+        </table>
+        <div class="table-footer">المجموع: <span class="total-chip">15 ساعة</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SEMESTER 2 ══ -->
+  <div class="sem-wrap">
+    <div class="sem-card" id="sem2">
+      <div class="sem-header" style="background:var(--sem2);" onclick="toggle('sem2')">
+        <div class="sem-title-row">
+          <div class="sem-num">٢</div>
+          <div>
+            <div class="sem-name">الفصل الدراسي الثاني</div>
+            <div class="sem-sub">المستوى الثاني</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:.8rem">
+          <span class="sem-credit-badge">15 ساعة</span>
+          <span class="sem-toggle">▼</span>
+        </div>
+      </div>
+      <div class="sem-body">
+        <table>
+          <thead><tr>
+            <th>#</th><th>رمز المقرر</th><th>اسم المقرر</th>
+            <th style="text-align:center">ساعات</th><th>المتطلب</th>
+          </tr></thead>
+          <tbody>
+            <tr><td><span class="row-n">1</span></td><td><span class="td-code">0221عرب2</span></td><td class="td-name">مهارات اللغة العربية</td><td class="td-credit">2</td><td><span class="td-prereq none">–</span></td></tr>
+            <tr><td><span class="row-n">2</span></td><td><span class="td-code">0292نجل2</span></td><td class="td-name">لغة إنجليزية متخصصة</td><td class="td-credit">2</td><td><span class="td-prereq">0522نجل5 – اللغة الإنجليزية المكثفة</span></td></tr>
+            <tr><td><span class="row-n">3</span></td><td><span class="td-code">0381ريض3</span></td><td class="td-name">تفاضل وتكامل 1</td><td class="td-credit">3</td><td><span class="td-prereq none">–</span></td></tr>
+            <tr><td><span class="row-n">4</span></td><td><span class="td-code">0384ريض3</span></td><td class="td-name">إحصاء واحتمالات</td><td class="td-credit">3</td><td><span class="td-prereq none">–</span></td></tr>
+            <tr><td><span class="row-n">5</span></td><td><span class="td-code">1312عال3</span></td><td class="td-name">مقدمة في البرمجة</td><td class="td-credit">3</td><td><span class="td-prereq">1311عال3 – حل المشاكل والبرمجة</span></td></tr>
+            <tr><td><span class="row-n">6</span></td><td><span class="td-code">2261نال2</span></td><td class="td-name">التواصل العلمي</td><td class="td-credit">2</td><td><span class="td-prereq none">–</span></td></tr>
+          </tbody>
+        </table>
+        <div class="table-footer">المجموع: <span class="total-chip">15 ساعة</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SEMESTER 3 ══ -->
+  <div class="sem-wrap">
+    <div class="sem-card" id="sem3">
+      <div class="sem-header" style="background:var(--sem3);" onclick="toggle('sem3')">
+        <div class="sem-title-row">
+          <div class="sem-num">٣</div>
+          <div>
+            <div class="sem-name">الفصل الدراسي الثالث</div>
+            <div class="sem-sub">المستوى الثالث</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:.8rem">
+          <span class="sem-credit-badge">18 ساعة</span>
+          <span class="sem-toggle">▼</span>
+        </div>
+      </div>
+      <div class="sem-body">
+        <table>
+          <thead><tr>
+            <th>#</th><th>رمز المقرر</th><th>اسم المقرر</th>
+            <th style="text-align:center">ساعات</th><th>المتطلب</th>
+          </tr></thead>
+          <tbody>
+            <tr><td><span class="row-n">1</span></td><td><span class="td-code">0382ريض3</span></td><td class="td-name">تفاضل وتكامل 2</td><td class="td-credit">3</td><td><span class="td-prereq">0381ريض3 – تفاضل وتكامل 1</span></td></tr>
+            <tr><td><span class="row-n">2</span></td><td><span class="td-code">1308فيز3</span></td><td class="td-name">مبادئ الفيزياء</td><td class="td-credit">3</td><td><span class="td-prereq none">–</span></td></tr>
+            <tr><td><span class="row-n">3</span></td><td><span class="td-code">2222عال2</span></td><td class="td-name">الرياضيات المتقطعة</td><td class="td-credit">2</td><td><span class="td-prereq">0384ريض3 – إحصاء واحتمالات</span></td></tr>
+            <tr><td><span class="row-n">4</span></td><td><span class="td-code">2321عال3</span></td><td class="td-name">معمارية وتنظيم الحاسبات</td><td class="td-credit">3</td><td><span class="td-prereq">1311عال3 – حل المشاكل والبرمجة</span></td></tr>
+            <tr><td><span class="row-n">5</span></td><td><span class="td-code">2321نال3</span></td><td class="td-name">نظم إدارة قواعد البيانات</td><td class="td-credit">3</td><td><span class="td-prereq none">–</span></td></tr>
+            <tr><td><span class="row-n">6</span></td><td><span class="td-code">2413عال4</span></td><td class="td-name">البرمجة كائنية التوجه</td><td class="td-credit">4</td><td><span class="td-prereq">1312عال3 – مقدمة في البرمجة</span></td></tr>
+          </tbody>
+        </table>
+        <div class="table-footer">المجموع: <span class="total-chip">18 ساعة</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SEMESTER 4 ══ -->
+  <div class="sem-wrap">
+    <div class="sem-card" id="sem4">
+      <div class="sem-header" style="background:var(--sem4);" onclick="toggle('sem4')">
+        <div class="sem-title-row">
+          <div class="sem-num">٤</div>
+          <div>
+            <div class="sem-name">الفصل الدراسي الرابع</div>
+            <div class="sem-sub">المستوى الرابع</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:.8rem">
+          <span class="sem-credit-badge">21 ساعة</span>
+          <span class="sem-toggle">▼</span>
+        </div>
+      </div>
+      <div class="sem-body">
+        <table>
+          <thead><tr>
+            <th>#</th><th>رمز المقرر</th><th>اسم المقرر</th>
+            <th style="text-align:center">ساعات</th><th>المتطلب</th>
+          </tr></thead>
+          <tbody>
+            <tr><td><span class="row-n">1</span></td><td><span class="td-code">2224عال2</span></td><td class="td-name">بحوث العمليات</td><td class="td-credit">2</td><td><span class="td-prereq none">–</span></td></tr>
+            <tr><td><span class="row-n">2</span></td><td><span class="td-code">2314عال3</span></td><td class="td-name">البرمجة المتقدمة</td><td class="td-credit">3</td><td><span class="td-prereq">2413عال4 – البرمجة كائنية التوجه</span></td></tr>
+            <tr><td><span class="row-n">3</span></td><td><span class="td-code">2323عال3</span></td><td class="td-name">نظم التشغيل</td><td class="td-credit">3</td><td><span class="td-prereq">2321عال3 – معمارية وتنظيم الحاسبات</span></td></tr>
+            <tr><td><span class="row-n">4</span></td><td><span class="td-code">2341عال3</span></td><td class="td-name">هندسة البرمجيات</td><td class="td-credit">3</td><td><span class="td-prereq">2413عال4 – البرمجة كائنية التوجه</span></td></tr>
+            <tr><td><span class="row-n">5</span></td><td><span class="td-code">2431عال4</span></td><td class="td-name">خوارزميات وهياكل البيانات</td><td class="td-credit">4</td><td><span class="td-prereq">2413عال4 – البرمجة كائنية التوجه</span></td></tr>
+            <tr><td><span class="row-n">6</span></td><td><span class="td-code">2461عال4</span></td><td class="td-name">شبكات الحاسب</td><td class="td-credit">4</td><td><span class="td-prereq">2413عال4 – البرمجة كائنية التوجه</span></td></tr>
+            <tr><td><span class="row-n">7</span></td><td><span class="td-code">4256نال2</span></td><td class="td-name">أخلاقيات الحوسبة</td><td class="td-credit">2</td><td><span class="td-prereq none">–</span></td></tr>
+          </tbody>
+        </table>
+        <div class="table-footer">المجموع: <span class="total-chip">21 ساعة</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SEMESTER 5 ══ -->
+  <div class="sem-wrap">
+    <div class="sem-card" id="sem5">
+      <div class="sem-header" style="background:var(--sem5);" onclick="toggle('sem5')">
+        <div class="sem-title-row">
+          <div class="sem-num">٥</div>
+          <div>
+            <div class="sem-name">الفصل الدراسي الخامس</div>
+            <div class="sem-sub">المستوى الخامس</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:.8rem">
+          <span class="sem-credit-badge">19 ساعة</span>
+          <span class="sem-toggle">▼</span>
+        </div>
+      </div>
+      <div class="sem-body">
+        <table>
+          <thead><tr>
+            <th>#</th><th>رمز المقرر</th><th>اسم المقرر</th>
+            <th style="text-align:center">ساعات</th><th>المتطلب</th>
+          </tr></thead>
+          <tbody>
+            <tr><td><span class="row-n">1</span></td><td><span class="td-code">1309كيم3</span></td><td class="td-name">كيمياء</td><td class="td-credit">3</td><td><span class="td-prereq none">–</span></td></tr>
+            <tr><td><span class="row-n">2</span></td><td><span class="td-code">3226عال2</span></td><td class="td-name">الابتكار التقني</td><td class="td-credit">2</td><td><span class="td-prereq none">–</span></td></tr>
+            <tr><td><span class="row-n">3</span></td><td><span class="td-code">3251عال2</span></td><td class="td-name">الذكاء الاصطناعي</td><td class="td-credit">2</td><td><span class="td-prereq">2431عال4 – خوارزميات وهياكل البيانات</span></td></tr>
+            <tr><td><span class="row-n">4</span></td><td><span class="td-code">3342عال3</span></td><td class="td-name">هندسة الويب</td><td class="td-credit">3</td><td><span class="td-prereq">2314عال3 – البرمجة المتقدمة</span></td></tr>
+            <tr><td><span class="row-n">5</span></td><td><span class="td-code">3352عال3</span></td><td class="td-name">تعلم الآلة</td><td class="td-credit">3</td><td><span class="td-prereq">0384ريض3 – إحصاء واحتمالات</span></td></tr>
+            <tr><td><span class="row-n">6</span></td><td><span class="td-code">3362عال3</span></td><td class="td-name">أمن الحاسب والشبكات 1</td><td class="td-credit">3</td><td><span class="td-prereq">2461عال4 – شبكات الحاسب</span></td></tr>
+            <tr><td><span class="row-n">7</span></td><td><span class="td-code">3371عال3</span></td><td class="td-name">تصميم وتطوير الألعاب</td><td class="td-credit">3</td><td><span class="td-prereq">2413عال4 – البرمجة كائنية التوجه</span></td></tr>
+          </tbody>
+        </table>
+        <div class="table-footer">المجموع: <span class="total-chip">19 ساعة</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SEMESTER 6 ══ -->
+  <div class="sem-wrap">
+    <div class="sem-card" id="sem6">
+      <div class="sem-header" style="background:var(--sem6);" onclick="toggle('sem6')">
+        <div class="sem-title-row">
+          <div class="sem-num">٦</div>
+          <div>
+            <div class="sem-name">الفصل الدراسي السادس</div>
+            <div class="sem-sub">المستوى السادس</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:.8rem">
+          <span class="sem-credit-badge">9 ساعات</span>
+          <span class="sem-toggle">▼</span>
+        </div>
+      </div>
+      <div class="sem-body">
+        <table>
+          <thead><tr>
+            <th>#</th><th>رمز المقرر</th><th>اسم المقرر</th>
+            <th style="text-align:center">ساعات</th><th>المتطلب</th>
+          </tr></thead>
+          <tbody>
+            <tr><td><span class="row-n">1</span></td><td><span class="td-code">3325عال3</span></td><td class="td-name">الحوسبة المتوازية والموزعة</td><td class="td-credit">3</td><td><span class="td-prereq">2323عال3 – نظم التشغيل</span></td></tr>
+            <tr><td><span class="row-n">2</span></td><td><span class="td-code">3332عال3</span></td><td class="td-name">تصميم وتحليل الخوارزميات</td><td class="td-credit">3</td><td><span class="td-prereq">2431عال4 – خوارزميات وهياكل البيانات</span></td></tr>
+            <tr><td><span class="row-n">3</span></td><td><span class="td-code">3343عال3</span></td><td class="td-name">إدارة مشاريع البرمجيات</td><td class="td-credit">3</td><td><span class="td-prereq">2341عال3 – هندسة البرمجيات</span></td></tr>
+          </tbody>
+        </table>
+        <div class="table-footer">المجموع: <span class="total-chip">9 ساعات</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SEMESTER 7 ══ -->
+  <div class="sem-wrap">
+    <div class="sem-card" id="sem7">
+      <div class="sem-header" style="background:var(--sem7);" onclick="toggle('sem7')">
+        <div class="sem-title-row">
+          <div class="sem-num">٧</div>
+          <div>
+            <div class="sem-name">الفصل الدراسي السابع</div>
+            <div class="sem-sub">المستوى السابع</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:.8rem">
+          <span class="sem-credit-badge">13 ساعة</span>
+          <span class="sem-toggle">▼</span>
+        </div>
+      </div>
+      <div class="sem-body">
+        <table>
+          <thead><tr>
+            <th>#</th><th>رمز المقرر</th><th>اسم المقرر</th>
+            <th style="text-align:center">ساعات</th><th>المتطلب</th>
+          </tr></thead>
+          <tbody>
+            <tr><td><span class="row-n">1</span></td><td><span class="td-code">0401مهر4</span></td><td class="td-name">مهارات الإعداد الوظيفي (تدريب 1)</td><td class="td-credit">4</td><td><span class="td-prereq none">–</span></td></tr>
+            <tr><td><span class="row-n">2</span></td><td><span class="td-code">4327عال3</span></td><td class="td-name">المترجمات</td><td class="td-credit">3</td><td><span class="td-prereq">2314عال3 – البرمجة المتقدمة</span></td></tr>
+            <tr><td><span class="row-n">3</span></td><td><span class="td-code">4342هال3</span></td><td class="td-name">إنترنت الأشياء</td><td class="td-credit">3</td><td><span class="td-prereq">3362عال3 – أمن الحاسب والشبكات 1</span></td></tr>
+            <tr><td><span class="row-n">4</span></td><td><span class="td-code">4381عال3</span></td><td class="td-name">مشروع</td><td class="td-credit">3</td><td><span class="td-prereq">3343عال3 – إدارة مشاريع البرمجيات</span></td></tr>
+          </tbody>
+        </table>
+        <div class="table-footer">المجموع: <span class="total-chip">13 ساعة</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SEMESTER 8 ══ -->
+  <div class="sem-wrap">
+    <div class="sem-card" id="sem8">
+      <div class="sem-header" style="background:var(--sem8);" onclick="toggle('sem8')">
+        <div class="sem-title-row">
+          <div class="sem-num">٨</div>
+          <div>
+            <div class="sem-name">الفصل الدراسي الثامن</div>
+            <div class="sem-sub">المستوى الثامن</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:.8rem">
+          <span class="sem-credit-badge">8 ساعات</span>
+          <span class="sem-toggle">▼</span>
+        </div>
+      </div>
+      <div class="sem-body">
+        <table>
+          <thead><tr>
+            <th>#</th><th>رمز المقرر</th><th>اسم المقرر</th>
+            <th style="text-align:center">ساعات</th><th>المتطلب</th>
+          </tr></thead>
+          <tbody>
+            <tr><td><span class="row-n">1</span></td><td><span class="td-code">4882عال8</span></td><td class="td-name">تدريب تعاوني</td><td class="td-credit">8</td><td><span class="td-prereq">0401مهر4 – مهارات الإعداد الوظيفي</span></td></tr>
+          </tbody>
+        </table>
+        <div class="table-footer">المجموع: <span class="total-chip">8 ساعات</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ ELECTIVES ══ -->
+  <div class="section-label" style="margin-top:2.5rem">المجموعة الاختيارية – يختار الطالب 2 ساعة</div>
+  <div class="sem-card" id="semE" style="border:2px solid #e8c87a;">
+    <div class="sem-header" style="background:var(--elec);" onclick="toggle('semE')">
+      <div class="sem-title-row">
+        <div class="sem-num" style="background:var(--gold);color:var(--navy);">⭐</div>
+        <div>
+          <div class="sem-name">المقررات الاختيارية</div>
+          <div class="sem-sub">يختار الطالب مقررًا واحدًا (2 ساعة) من القائمة التالية</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:.8rem">
+        <span class="sem-credit-badge">20 ساعة متاحة</span>
+        <span class="sem-toggle">▼</span>
+      </div>
+    </div>
+    <div class="sem-body">
+      <div class="elec-grid">
+        <div class="elec-item"><div><div class="elec-name">الأخلاق والقيم</div><div class="elec-code">0211ثقف2</div></div><span class="elec-hr">2 س</span></div>
+        <div class="elec-item"><div><div class="elec-name">الحقوق</div><div class="elec-code">0213ثقف2</div></div><span class="elec-hr">2 س</span></div>
+        <div class="elec-item"><div><div class="elec-name">بناء الوعي</div><div class="elec-code">0214ثقف2</div></div><span class="elec-hr">2 س</span></div>
+        <div class="elec-item"><div><div class="elec-name">المدخل إلى الثقافة الوطنية</div><div class="elec-code">0215وطن2</div></div><span class="elec-hr">2 س</span></div>
+        <div class="elec-item"><div><div class="elec-name">الفكر والفلسفة</div><div class="elec-code">0231ثقف2</div></div><span class="elec-hr">2 س</span></div>
+        <div class="elec-item"><div><div class="elec-name">الفنون</div><div class="elec-code">0241فن2</div></div><span class="elec-hr">2 س</span></div>
+        <div class="elec-item"><div><div class="elec-name">مبادئ ريادة الأعمال</div><div class="elec-code">0251دار2</div></div><span class="elec-hr">2 س</span></div>
+        <div class="elec-item"><div><div class="elec-name">المواطنة</div><div class="elec-code">0271وطن2</div></div><span class="elec-hr">2 س</span></div>
+        <div class="elec-item"><div><div class="elec-name">التاريخ الوطني</div><div class="elec-code">0272وطن2</div></div><span class="elec-hr">2 س</span></div>
+        <div class="elec-item"><div><div class="elec-name">الوعي الصحي</div><div class="elec-code">0281صحة2</div></div><span class="elec-hr">2 س</span></div>
+      </div>
+      <div class="elec-note">⚠️ المجموع المتاح 20 ساعة – يُلزم الطالب بانتخاب <strong>2 ساعة فقط</strong></div>
+    </div>
+  </div>
+
+  <!-- ══ FREE HOURS ══ -->
+  <div class="free-card">
+    <div class="free-icon">📂</div>
+    <div>
+      <div class="free-text">الساعات الحرة (Free Electives)</div>
+      <div class="free-sub">2 ساعة معتمدة – يختار الطالب مقررًا حرًا وفق مسار دراسته</div>
+    </div>
+    <div style="margin-right:auto;background:#e6f4ee;color:#1b6b6b;border-radius:30px;padding:0.35rem 1rem;font-size:0.82rem;font-weight:700;white-space:nowrap">2 ساعة</div>
+  </div>
+
+  <!-- Summary -->
+  <div style="margin-top:2rem;background:var(--navy);color:white;border-radius:18px;padding:1.4rem 2rem;display:flex;flex-wrap:wrap;gap:1.5rem;align-items:center;justify-content:space-between;">
+    <div style="font-size:1.05rem;font-weight:700">ملخص الساعات المعتمدة الكلي</div>
+    <div style="display:flex;flex-wrap:wrap;gap:1rem;font-size:0.85rem;">
+      <span style="background:rgba(255,255,255,0.12);border-radius:30px;padding:0.3rem 1rem">ف١: 15 | ف٢: 15 | ف٣: 18 | ف٤: 21</span>
+      <span style="background:rgba(255,255,255,0.12);border-radius:30px;padding:0.3rem 1rem">ف٥: 19 | ف٦: 9 | ف٧: 13 | ف٨: 8</span>
+      <span style="background:var(--gold);color:var(--navy);border-radius:30px;padding:0.3rem 1rem;font-weight:700">الإجمالي: 140 ساعة ✓</span>
+    </div>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  جامعة الملك خالد | كلية علوم الحاسب | الخطة الدراسية الإصدار 10 | الفصل 461 | التخصص: علوم الحاسب 010201<br>
+  البيانات مطابقة بالكامل لوثيقة الخطة الرسمية الصادرة بتاريخ 18-04-2026
+</div>
+
+<script>
+  function toggle(id) {
+    document.getElementById(id).classList.toggle('collapsed');
+  }
+</script>
+</body>
+</html>
