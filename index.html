@@ -570,30 +570,6 @@
 </div>
 
 <script>
-function decodeBase64(base64) {
-  try {
-    const binary = atob(base64);
-    const bytes = Uint8Array.from(binary, c => c.charCodeAt(0));
-    return new TextDecoder('utf-8').decode(bytes);
-  } catch (error) {
-    console.error("Invalid Base64 string:", error);
-    return null;
-  }
-}
-  
-  const urlParams = new URLSearchParams(window.location.search);
-  const JsonC = urlParams.get("JsonC");
-  
-  if (JsonC) {
-    const decoded = decodeBase64(JsonC);
-  
-    if (decoded !== null) {
-      document.getElementById("jsonInput").value = decoded;
-      applyJsonStatus();
-    }
-  }
-  
-  
   const defaultStatusMap = {
     "0522نجل-5": "NOT_TAKEN", "1311عال-3": "NOT_TAKEN", "0383ريض-3": "NOT_TAKEN", "0212ثقف-2": "NOT_TAKEN",
     "0291تطوع-2": "NOT_TAKEN", "0292نجل-2": "NOT_TAKEN", "0381ريض-3": "NOT_TAKEN", "0384ريض-3": "NOT_TAKEN",
@@ -694,6 +670,29 @@ function decodeBase64(base64) {
     { code: "0272وطن-2", name: "التاريخ الوطني", credit: 2 },
     { code: "0281صحة-2", name: "الوعي الصحي", credit: 2 }
   ];
+
+  function decodeBase64(base64) {
+  try {
+    const binary = atob(base64);
+    const bytes = Uint8Array.from(binary, c => c.charCodeAt(0));
+    return new TextDecoder('utf-8').decode(bytes);
+  } catch (error) {
+    console.error("Invalid Base64 string:", error);
+    return null;
+  }
+}
+  
+  const urlParams = new URLSearchParams(window.location.search);
+  const JsonC = urlParams.get("JsonC");
+  
+  if (JsonC) {
+    const decoded = decodeBase64(JsonC);
+  
+    if (decoded !== null) {
+      document.getElementById("jsonInput").value = decoded;
+      applyJsonStatus();
+    }
+  }
   
   function renderAll() {
     const container = document.getElementById('dynamic-semesters');
