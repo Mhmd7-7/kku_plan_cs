@@ -570,6 +570,8 @@
 </div>
 
 <script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const JsonC = urlParams.get('JsonC') || '';
   document.getElementById('jsonInput').value = JsonC;
   const defaultStatusMap = {
     "0522نجل-5": "NOT_TAKEN", "1311عال-3": "NOT_TAKEN", "0383ريض-3": "NOT_TAKEN", "0212ثقف-2": "NOT_TAKEN",
