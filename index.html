@@ -570,14 +570,16 @@
 </div>
 
 <script>
-  function decodeBase64(base64) {
-    try {
-      return atob(base64);
-    } catch (error) {
-      console.error("Invalid Base64 string:", error);
-      return null;
-    }
+function decodeBase64(base64) {
+  try {
+    const binary = atob(base64);
+    const bytes = Uint8Array.from(binary, c => c.charCodeAt(0));
+    return new TextDecoder('utf-8').decode(bytes);
+  } catch (error) {
+    console.error("Invalid Base64 string:", error);
+    return null;
   }
+}
   
   const urlParams = new URLSearchParams(window.location.search);
   const JsonC = urlParams.get("JsonC");
